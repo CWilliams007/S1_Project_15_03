@@ -7,8 +7,8 @@
 
    Filename: mas_register.js
 
-   Author:  
-   Date:    
+   Author:  Chad Williams
+   Date:    4.18.19
    
    Function List
    =============
@@ -28,3 +28,12 @@
 
 */
 
+
+window.addEventListener('load', function () {
+      calcCart();
+      var regSubmit = document.getElementById("regSubmit");
+      regSubmit.addEventListener('onclick', sessionTest());
+      var input = document.querySelectorAll('#fnBox, #lnBox, #groupBox, #mailBox, #phoneBox, #banquetBox');
+      console.log(input);
+      input.onblur = calcCart;
+})
