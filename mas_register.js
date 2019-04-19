@@ -36,4 +36,23 @@ window.addEventListener('load', function () {
       var input = document.querySelectorAll('#fnBox, #lnBox, #groupBox, #mailBox, #phoneBox, #banquetBox');
       console.log(input);
       input.onblur = calcCart;
+
+      document.getElementById("#sessionBox").onchange = calcCart;
+      document.getElementById("#mediaCB").onclick = calcCart;
+
 })
+
+function sessionTest() {
+      var sessionBox = document.getElementById("sessionBox");
+      if (sessionBox.selectedIndex === -1) {
+            sessionBox.setCustomValidity("Select a Session Package");
+      } else {
+            sessionBox.setCustomValidity("");
+      }
+}
+
+function calcCart() {
+      var fName = document.getElementById("#firstName").value;
+      var lName = document.getElementById("#lastName").value;
+      var confName = fName + lName;
+}
