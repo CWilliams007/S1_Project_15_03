@@ -55,4 +55,9 @@ function calcCart() {
       var fName = document.getElementById("#firstName").value;
       var lName = document.getElementById("#lastName").value;
       var confName = fName + lName;
+      var confGroup = document.getElementById("#groupBox").value;
+      var confMail = document.getElementById("#mailBox").value;
+      var confPhone = document.getElementById("#phoneBox").value;
+      var confBanquet = document.getElementById("#banquetBox").value;
+      var confBanquetCost = confBanquet * 55;
 }
