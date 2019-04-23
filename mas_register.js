@@ -33,13 +33,18 @@ window.addEventListener('load', function () {
       calcCart();
       var regSubmit = document.getElementById("regSubmit");
       regSubmit.addEventListener('onclick', sessionTest());
-      var input = document.querySelectorAll('#fnBox, #lnBox, #groupBox, #mailBox, #phoneBox, #banquetBox');
-      console.log(input);
-      input.onblur = calcCart;
-
-      document.getElementById("#sessionBox").onchange = calcCart;
-      document.getElementById("#mediaCB").onclick = calcCart;
-
+      // var input = document.querySelectorAll('#fnBox, #lnBox, #groupBox, #mailBox, #phoneBox, #banquetBox');
+      document.querySelector('#fnBox').onblur = calcCart;
+      document.querySelector('#lnBox').onblur = calcCart;
+      document.querySelector('#groupBox').onblur = calcCart;
+      document.querySelector('#mailBox').onblur = calcCart;
+      document.querySelector('#phoneBox').onblur = calcCart;
+      document.querySelector('#banquetBox').onblur = calcCart;
+      // console.log(input);
+      // input.onblur = calcCart;
+      console.log(document.getElementById("sessionBox"))
+      document.getElementById("sessionBox").onchange = calcCart;
+      document.getElementById("mediaCB").onclick = calcCart;
 })
 
 function sessionTest() {
@@ -51,13 +56,47 @@ function sessionTest() {
       }
 }
 
+
 function calcCart() {
-      var fName = document.getElementById("#firstName").value;
-      var lName = document.getElementById("#lastName").value;
-      var confName = fName + lName;
-      var confGroup = document.getElementById("#groupBox").value;
-      var confMail = document.getElementById("#mailBox").value;
-      var confPhone = document.getElementById("#phoneBox").value;
-      var confBanquet = document.getElementById("#banquetBox").value;
-      var confBanquetCost = confBanquet * 55;
+      console.log("123");
+      sessionStorage.setItem("confName", document.getElementById("fnBox").value + " " + document.getElementById("lnBox").value);
+      sessionStorage.setItem("confGroup", document.getElementById("groupBox").value);
+      sessionStorage.setItem("confMail", document.getElementById("mailBox").value);
+      sessionStorage.setItem("confPhone", document.getElementById("phoneBox").value);
+      sessionStorage.setItem("confBanquet", document.getElementById("banquetBox").value);
+      sessionStorage.setItem("confBanquetCost", sessionStorage.getItem("confBanquet" * 55));
+
+
+      if (sessionBox.selectedIndex != -1) {
+            var confSession = sessionBox[sessionBox.selectedIndex].text;
+            var confSessionCost = sessionBox[sessionBox.selectedIndex].value;
+      } else {
+            confSession = "";
+            confSessionCost = 0;
+      }
+
+      sessionStorage.setItem("mediaCB", document.getElementById("mediaCB"));
+      if (sessionStorage.getItem("mediaCB").checked) {
+            sessionStorage.setItem("confPack", "yes");
+            sessionStorage.setItem("confPackCost", 115);
+      } else {
+            sessionStorage.setItem("confPack", "no");
+            sessionStorage.setItem("confPackCost", 0);
+      }
+
+
+      sessionStorage.setItem("confTotal", parseFloat(sessionStorage.getItem("confBanquetCost")) + parseFloat(sessionStorage.getItem("confSessionCost")) + parseFloat(sessionStorage.getItem("confPackCost")));
+
+      writeSessionValues();
+}
+
+function writeSessionValues() {
+      document.getElementById("regName").textContent = sessionStorage.getItem('confName');
+      document.getElementById("regGroup").textContent = sessionStorage.getItem('confGroup');
+      document.getElementById("regEmail").textContent = sessionStorage.getItem('confMail');
+      document.getElementById("regPhone").textContent = sessionStorage.getItem('confPhone');
+      document.getElementById("regSession").textContent = sessionStorage.getItem('confSession');
+      document.getElementById("regBanquet").textContent = sessionStorage.getItem('confBanquet');
+      document.getElementById("regPack").textContent = sessionStorage.getItem('confPack');
+      document.getElementById("regTotal").textContent = "$" + sessionStorage.getItem("confTotal");
 }

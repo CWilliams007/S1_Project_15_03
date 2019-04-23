@@ -20,3 +20,19 @@
 
 
 */
+
+window.addEventListener("load", writeSessionValues);
+
+function writeSessionValues(confName, confGroup, confMail, confPhone, confSession, confBanquet, confPack, confTotal) {
+      document.getElementById("regName").textContent = confName;
+      console.log
+      document.getElementById("regGroup").textContent = confGroup;
+      document.getElementById("regEmail").textContent = confMail;
+      document.getElementById("regPhone").textContent = confPhone;
+      document.getElementById("regSession").textContent = confSession;
+      document.getElementById("regBanquet").textContent = confBanquet;
+      document.getElementById("regPack").textContent = confPack;
+      console.log(confName)
+
+      document.getElementById("regTotal").textContent = "$" + confTotal
+}
