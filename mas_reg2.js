@@ -23,6 +23,7 @@
 
 window.addEventListener("load", writeSessionValues);
 
+// calls and displays the sessionStorages variables from the other JS document on this page
 function writeSessionValues(confName, confGroup, confMail, confPhone, confSession, confBanquet, confPack, confTotal) {
       document.getElementById("regName").textContent = confName;
       console.log

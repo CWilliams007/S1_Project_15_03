@@ -28,10 +28,12 @@
 
 */
 
-
+// on load runs anonymous function
 window.addEventListener('load', function () {
+      // runs calcCart function
       calcCart();
       var regSubmit = document.getElementById("regSubmit");
+      // onblur and onChange for any of these elements it will run calcCart
       regSubmit.addEventListener('onclick', sessionTest());
       // var input = document.querySelectorAll('#fnBox, #lnBox, #groupBox, #mailBox, #phoneBox, #banquetBox');
       document.querySelector('#fnBox').onblur = calcCart;
@@ -47,6 +49,7 @@ window.addEventListener('load', function () {
       document.getElementById("mediaCB").onclick = calcCart;
 })
 
+// tests if a option in the session box has been selected, sets custom error message 
 function sessionTest() {
       var sessionBox = document.getElementById("sessionBox");
       if (sessionBox.selectedIndex === -1) {
@@ -59,6 +62,7 @@ function sessionTest() {
 
 function calcCart() {
       console.log("123");
+      // sets sessionStorage items so they can be called on a different js document in the same session
       sessionStorage.setItem("confName", document.getElementById("fnBox").value + " " + document.getElementById("lnBox").value);
       sessionStorage.setItem("confGroup", document.getElementById("groupBox").value);
       sessionStorage.setItem("confMail", document.getElementById("mailBox").value);
@@ -66,7 +70,7 @@ function calcCart() {
       sessionStorage.setItem("confBanquet", document.getElementById("banquetBox").value);
       sessionStorage.setItem("confBanquetCost", sessionStorage.getItem("confBanquet" * 55));
 
-
+      // sets custom error messages
       if (sessionBox.selectedIndex != -1) {
             var confSession = sessionBox[sessionBox.selectedIndex].text;
             var confSessionCost = sessionBox[sessionBox.selectedIndex].value;
@@ -75,6 +79,7 @@ function calcCart() {
             confSessionCost = 0;
       }
 
+      // sets radio buttons effects if it is checked
       sessionStorage.setItem("mediaCB", document.getElementById("mediaCB"));
       if (sessionStorage.getItem("mediaCB").checked) {
             sessionStorage.setItem("confPack", "yes");
@@ -84,12 +89,12 @@ function calcCart() {
             sessionStorage.setItem("confPackCost", 0);
       }
 
-
+      // runs writeSessionValues function and parses the numbers from the cost variables for the total cost.
       sessionStorage.setItem("confTotal", parseFloat(sessionStorage.getItem("confBanquetCost")) + parseFloat(sessionStorage.getItem("confSessionCost")) + parseFloat(sessionStorage.getItem("confPackCost")));
-
       writeSessionValues();
 }
 
+// displays the values you have entered
 function writeSessionValues() {
       document.getElementById("regName").textContent = sessionStorage.getItem('confName');
       document.getElementById("regGroup").textContent = sessionStorage.getItem('confGroup');
